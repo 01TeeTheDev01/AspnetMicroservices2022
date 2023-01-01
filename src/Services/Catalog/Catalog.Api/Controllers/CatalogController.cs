@@ -52,7 +52,7 @@ namespace Catalog.Api.Controllers
         {
             var products = await _repository.GetProductsByName(name);
 
-            if (products is null) return NotFound($"Products with name [{name}] do not exist in the database.");
+            if (products is null || !products.Any()) return NotFound($"Products with name [{name}] do not exist in the database.");
 
             return Ok(products);
         }
@@ -66,7 +66,7 @@ namespace Catalog.Api.Controllers
         {
             var products = await _repository.GetProductsByCategory(name);
 
-            if (products is null) return NotFound($"Products with category [{name}] do not exist in the database.");
+            if (products is null || !products.Any()) return NotFound($"Products with category [{name}] do not exist in the database.");
 
             return Ok(products);
         }
