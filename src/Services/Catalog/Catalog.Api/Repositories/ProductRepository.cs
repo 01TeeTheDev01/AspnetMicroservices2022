@@ -28,7 +28,7 @@ namespace Catalog.Api.Repositories
                 //Add product to database
                 await _context.Products.InsertOneAsync(product);
 
-                _logger.LogInformation($"Product=[{product.Id}] has been added to the database");
+                _logger.LogInformation("Product=[{0}] has been added to the database", product.Id);
 
                 return true;
             }
@@ -82,7 +82,7 @@ namespace Catalog.Api.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError(ex, "{0}", ex.Message);
                 return null;
             }
         }
@@ -128,7 +128,7 @@ namespace Catalog.Api.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError(ex, "{0}", ex.Message);
                 return null;
             }
         }
@@ -156,7 +156,7 @@ namespace Catalog.Api.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError(ex, "{0}", ex.Message);
                 return null;
             }
         }
@@ -177,7 +177,7 @@ namespace Catalog.Api.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError(ex, "{0}", ex.Message);
 
                 return false;
             }
