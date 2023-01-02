@@ -23,7 +23,7 @@ namespace Basket.Api.Services
         }
 
 
-        public async Task<IReadOnlyCollection<ShoppingBasket>?> GetBasket(string userName)
+        public async Task<ShoppingBasket?>? GetBasket(string userName)
         {
             //Get username key from the Redis database
             string? usernameKey = await _redisCache.GetStringAsync(userName);
@@ -38,10 +38,10 @@ namespace Basket.Api.Services
             if (shoppingBasket is null) return default;
 
             //return user's shopping basket
-            return (IReadOnlyCollection<ShoppingBasket>)shoppingBasket;
+            return shoppingBasket;
         }
 
-        public async Task<ShoppingBasket?> UpdateBasket(ShoppingBasket shoppingBasket)
+        public async Task<ShoppingBasket?>? UpdateBasket(ShoppingBasket shoppingBasket)
         {
             //Check if username is present
             if (string.IsNullOrEmpty(shoppingBasket.UserName)) return default;
@@ -50,7 +50,7 @@ namespace Basket.Api.Services
             await _redisCache.SetStringAsync(shoppingBasket.UserName, JsonConvert.SerializeObject(shoppingBasket));
 
             //Get shopping basket
-            return (ShoppingBasket?)await GetBasket(shoppingBasket.UserName);
+            return await GetBasket(shoppingBasket.UserName);
         }
     }
 }

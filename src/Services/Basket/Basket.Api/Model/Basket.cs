@@ -4,6 +4,7 @@ namespace Basket.Api.Model
 {
     public class ShoppingBasket
     {
+        //[Required(ErrorMessage = "Please enter a username.")]
         public string? UserName { get; set; }
         public List<BasketItem>? BasketItems { get; set; } = new();
         public decimal? BasketTotalPrice
